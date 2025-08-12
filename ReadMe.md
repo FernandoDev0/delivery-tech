@@ -1,0 +1,1 @@
+### Instalacaco das dependencias spring boot java JDK 21 ###
