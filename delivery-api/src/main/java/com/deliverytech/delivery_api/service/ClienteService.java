@@ -1,6 +1,6 @@
 package com.deliverytech.delivery_api.service;
 
-import com.deliverytech.delivery_api.dto.request. ClienteRequest;
+import com.deliverytech.delivery_api.dto.request.ClienteRequest;
 import com.deliverytech.delivery_api.dto.response.ClienteResponse;
 import java.util.List;
 
