@@ -40,5 +40,5 @@ Sistema de delivery desenvolvido com Spring Boot e Java 21.
 ## 👨‍💻 Desenvolvedor
 
 Fernando Aparecido - [Turma 3T 58A]
-Desenvolvido com JDK 21 e Spring Boot 3.2.x
+Desenvolvido com JDK 21 e Spring Boot 3.5.4
  
