@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+
 public interface ProdutoService {
     
     // Operações básicas
@@ -25,4 +26,5 @@ public interface ProdutoService {
     List<Produto> buscarPorCategoria(Long restauranteId, String categoria);
     List<Produto> buscarPorFaixaDePreco(Long restauranteId, BigDecimal precoMin, BigDecimal precoMax);
     List<Produto> produtosMaisVendidos(Long restauranteId);
+    List<Produto> listarTodos();
 }

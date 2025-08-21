@@ -1,7 +1,5 @@
 package com.deliverytech.delivery_api.service;
 
-import com.deliverytech.delivery_api.dto.request.ItemPedidoRequest;
-import java.time.LocalDate;
 import java.util.List;
 import com.deliverytech.delivery_api.model.Produto;
 
@@ -10,7 +8,7 @@ import com.deliverytech.delivery_api.model.Pedido;
 import com.deliverytech.delivery_api.model.enums.StatusPedido;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 import java.util.Map;
 import java.util.Optional;
 

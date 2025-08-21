@@ -288,7 +288,12 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     
-
+    @Override
+    @Transactional(readOnly = true)
+    public List<Produto> listarTodos() {
+        log.info("Listando todos os produtos");
+        return produtoRepository.findAll();
+    }
 
     
 
