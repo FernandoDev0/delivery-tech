@@ -3,6 +3,8 @@ package com.deliverytech.delivery_api.model;
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,21 +28,25 @@ public class Restaurante {
     private String endereco;
     private String telefone;
     private String especialidade;
+    private String categoria;
+    private BigDecimal TaxaEntrega;
 
     @Column(length = 1000)
     private String descricao;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String horarioFuncionamento;
 
     @Builder.Default
     private Boolean ativo = true;
 
+
+
     @Builder.Default
     private LocalDateTime dataCadastro = LocalDateTime.now();
 
-    // Relacionamento com Produtos
     @OneToMany(mappedBy = "restaurante", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Produto> produtos = new ArrayList<>();
 
     // Relacionamento com Pedidos

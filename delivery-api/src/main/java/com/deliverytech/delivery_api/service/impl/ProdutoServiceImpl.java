@@ -42,7 +42,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         produto.setPreco(produtoRequest.getPreco());
         produto.setCategoria(produtoRequest.getCategoria());
         produto.setImagemUrl(produtoRequest.getImagemUrl());
-        produto.setDisponivel(produtoRequest.getDisponivel() != null ? produtoRequest.getDisponivel() : true);
+        produto.setAtivo(produtoRequest.getDisponivel() != null ? produtoRequest.getDisponivel() : true);
         produto.setRestaurante(restaurante);
         
         // Validações de negócio
@@ -123,7 +123,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         produto.setImagemUrl(produtoRequest.getImagemUrl());
         
         if (produtoRequest.getDisponivel() != null) {
-            produto.setDisponivel(produtoRequest.getDisponivel());
+            produto.setAtivo(produtoRequest.getDisponivel());
         }
         
         // Validar dados atualizados
@@ -164,10 +164,10 @@ public class ProdutoServiceImpl implements ProdutoService {
         Produto produto = buscarPorId(id)
             .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado: " + id));
         
-        produto.setDisponivel(!produto.getDisponivel());
+        produto.setAtivo(!produto.getAtivo());
         Produto produtoSalvo = produtoRepository.save(produto);
         
-        String status = produtoSalvo.getDisponivel() ? "disponibilizado" : "indisponibilizado";
+        String status = produtoSalvo.getAtivo() ? "disponibilizado" : "indisponibilizado";
         log.info("Produto {} com sucesso - ID: {}", status, id);
         
         return produtoSalvo;

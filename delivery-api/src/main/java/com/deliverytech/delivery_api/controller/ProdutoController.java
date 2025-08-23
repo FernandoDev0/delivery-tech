@@ -39,7 +39,7 @@ public class ProdutoController {
                 .categoria(request.getCategoria())
                 .descricao(request.getDescricao())
                 .preco(request.getPreco())
-                .disponivel(true)
+                .ativo(true)
                 .restaurante(restaurante)
                 .build();
 
@@ -47,7 +47,7 @@ public class ProdutoController {
         Produto salvo = produtoService.cadastrar(request);//corrido
         return ResponseEntity.status(201).body(new ProdutoResponse(
                 salvo.getId(), salvo.getNome(), salvo.getCategoria(), 
-                salvo.getDescricao(), salvo.getPreco(), salvo.getDisponivel()));
+                salvo.getDescricao(), salvo.getPreco(), salvo.getAtivo()));
     }
 
 
@@ -55,7 +55,7 @@ public class ProdutoController {
     public List<ProdutoResponse> listarPorRestaurante(@PathVariable Long restauranteId) {
         return produtoService.listarPorRestaurante(restauranteId).stream()
                 .map(p -> new ProdutoResponse(p.getId(), p.getNome(), p.getCategoria(),
-                    p.getDescricao(), p.getPreco(), p.getDisponivel()))
+                    p.getDescricao(), p.getPreco(), p.getAtivo()))
                 .collect(Collectors.toList());
     }
 
@@ -68,7 +68,7 @@ public class ProdutoController {
                 .preco(request.getPreco())
                 .build();
         Produto salvo = produtoService.atualizar(id, request); // corrigido
-        return ResponseEntity.ok(new ProdutoResponse(salvo.getId(), salvo.getNome(), salvo.getCategoria(), salvo.getDescricao(), salvo.getPreco(), salvo.getDisponivel()));
+        return ResponseEntity.ok(new ProdutoResponse(salvo.getId(), salvo.getNome(), salvo.getCategoria(), salvo.getDescricao(), salvo.getPreco(), salvo.getAtivo()));
     }
 
 
@@ -85,7 +85,7 @@ public class ProdutoController {
         return produtoService.listarTodos().stream()
                 .map(p -> new ProdutoResponse(
                     p.getId(), p.getNome(), p.getCategoria(),
-                    p.getDescricao(), p.getPreco(), p.getDisponivel()))
+                    p.getDescricao(), p.getPreco(), p.getAtivo()))
                 .collect(Collectors.toList());
     }
 
@@ -95,7 +95,7 @@ public class ProdutoController {
     public ResponseEntity<ProdutoResponse> buscarPorId(@PathVariable Long id) {
         return produtoService.buscarPorId(id)
                 .map(p -> new ProdutoResponse(p.getId(), p.getNome(), p.getCategoria(),
-                     p.getDescricao(), p.getPreco(), p.getDisponivel()))
+                     p.getDescricao(), p.getPreco(), p.getAtivo()))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -118,7 +118,7 @@ public class ProdutoController {
             @PathVariable String categoria) {
         return produtoService.buscarPorCategoria(restauranteId, categoria).stream()
                 .map(p -> new ProdutoResponse(p.getId(), p.getNome(), p.getCategoria(),
-                    p.getDescricao(), p.getPreco(), p.getDisponivel()))
+                    p.getDescricao(), p.getPreco(), p.getAtivo()))
                 .collect(Collectors.toList());
     }
 
@@ -134,7 +134,7 @@ public class ProdutoController {
         List<Produto> produtos = produtoService.buscarPorNome(restauranteId, nome);
         List<ProdutoResponse> response = produtos.stream()
             .map(p -> new ProdutoResponse(p.getId(), p.getNome(), p.getCategoria(),
-                p.getDescricao(), p.getPreco(), p.getDisponivel()))
+                p.getDescricao(), p.getPreco(), p.getAtivo()))
             .collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }

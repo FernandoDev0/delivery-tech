@@ -1,7 +1,7 @@
 package com.deliverytech.delivery_api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
+
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -22,6 +22,11 @@ public class Produto {
     private Long id;
 
     private String nome;
+
+    private boolean disponivel; 
+    
+
+
     
     @Column(length = 1000)
     private String descricao;
@@ -35,7 +40,7 @@ public class Produto {
     private String imagemUrl;
     
     @Builder.Default
-    private Boolean disponivel = true;
+    private Boolean ativo = true;
     
     @Builder.Default
     private LocalDateTime dataCadastro = LocalDateTime.now();
@@ -54,11 +59,11 @@ public class Produto {
     // Métodos auxiliares
     @JsonIgnore
     public void indisponibilizar() {
-        this.disponivel = false;
+        this.ativo = false;
     }
     
     @JsonIgnore
     public void disponibilizar() {
-        this.disponivel = true;
+        this.ativo = true;
     }
 }
