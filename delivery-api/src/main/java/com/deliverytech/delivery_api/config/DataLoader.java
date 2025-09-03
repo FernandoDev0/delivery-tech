@@ -29,6 +29,7 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("=== INICIANDO CARGA DE DADOS DE TESTE ===");
 
+     
         // Inserir dados de teste (sem limpar dados existentes)
         inserirClientes();
         inserirRestaurantes();
@@ -47,6 +48,7 @@ public class DataLoader implements CommandLineRunner {
 
 
 private void inserirClientes() {
+   
     System.out.println("--- Inserindo clientes ---");
 
     Cliente cliente1 = new Cliente();
@@ -83,6 +85,7 @@ private void inserirClientes() {
     cliente5.setTelefone("11543210987");
     cliente5.setEndereco("Rua 25 de Março, 654 - Centro, São Paulo - SP");
     cliente5.setAtivo(true);
+
 
     clienteRepository.saveAll(Arrays.asList(cliente1, cliente2, cliente3, cliente4, cliente5));
     System.out.println("✓ 5 clientes inseridos");
