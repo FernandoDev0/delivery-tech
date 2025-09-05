@@ -21,13 +21,13 @@ jobs:
           java-version: '21'
 
       - name: Rodar testes Maven
-        run: mvn test
+        run: mvn -f delivery-api/pom.xml test
 
       - name: Build do projeto (jar)
-        run: mvn clean package -DskipTests
+        run: mvn -f delivery-api/pom.xml clean package -DskipTests
 
       - name: Build imagem Docker
-        run: docker build -t delivery-tech:latest .
+        run: docker build -t delivery-tech:latest ./delivery-api
 
       - name: Rodar container para testes de integração
         run: docker run -d --name delivery-tech-test -p 8080:8080 delivery-tech:latest
@@ -52,8 +52,8 @@ jobs:
       - name: Salvar logs do pipeline
         run: |
           mkdir -p entregaveis
-          if [ -d target/surefire-reports ]; then
-            cp -r target/surefire-reports entregaveis/
+          if [ -d delivery-api/target/surefire-reports ]; then
+            cp -r delivery-api/target/surefire-reports entregaveis/
           else
             echo "Nenhum relatório de teste encontrado." > entregaveis/sem-relatorio.txt
           fi
