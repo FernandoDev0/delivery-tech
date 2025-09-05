@@ -54,7 +54,7 @@ services:
       
     volumes:
       # Persistir dados H2
-      - h2_data:/app/data
+      #- h2_data:/app/data
       # Persistir logs
       - app_logs:/app/logs
       
@@ -91,9 +91,9 @@ services:
 # VOLUMES PERSISTENTES
 # ===================================================================
 volumes:
-  h2_data:
-    driver: local
-    name: delivery_h2_data
+  #h2_data:
+  #  driver: local
+  # name: delivery_h2_data
   app_logs:
     driver: local
     name: delivery_logs

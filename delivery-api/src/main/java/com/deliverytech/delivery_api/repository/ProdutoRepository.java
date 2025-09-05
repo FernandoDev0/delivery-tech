@@ -1,6 +1,8 @@
 package com.deliverytech.delivery_api.repository;
 
 import com.deliverytech.delivery_api.model.Produto;
+import com.deliverytech.delivery_api.model.Restaurante;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,10 +10,15 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+    Optional<Produto> findByNome(String nome);
+
+    Optional<Produto> findByNomeAndRestaurante_Id(String nome, Long restauranteId);
     
+    Optional<Produto> findByNomeAndRestaurante(String nome, Restaurante restaurante);
     // Buscar produtos por restaurante
     List<Produto> findByRestauranteId(Long restauranteId);
     
@@ -29,12 +36,12 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     
     // Buscar produtos mais vendidos
     @Query(value = "SELECT p.*, COUNT(ip.id) as vendas " +
-                   "FROM produto p " +
-                   "JOIN item_pedido ip ON p.id = ip.produto_id " +
+    "FROM produto p " +
+    "JOIN item_pedido ip ON p.id = ip.produto_id " +
                    "JOIN pedido ped ON ip.pedido_id = ped.id " +
                    "WHERE p.restaurante_id = :restauranteId " +
                    "GROUP BY p.id " +
                    "ORDER BY vendas DESC " +
                    "LIMIT 10", nativeQuery = true)
-    List<Produto> findMostSoldProductsByRestaurante(@Param("restauranteId") Long restauranteId);
-}
+                   List<Produto> findMostSoldProductsByRestaurante(@Param("restauranteId") Long restauranteId);
+                }
